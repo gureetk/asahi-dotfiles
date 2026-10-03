@@ -29,8 +29,8 @@ Most of the savings come from not running things until you need them:
 | waybar (top bar and its drop-downs) | foot (terminal) |
 | mako (notifications and the volume / brightness pop-up) | pavucontrol, blueman, nm-connection-editor (full settings windows) |
 | swayidle + a small script (screen off, lock, auto-sleep) | swaylock (lock screen) |
-| | the quick settings panel: sliders, battery, power mode (about 45 MB, only while open) |
 | lxpolkit (password prompts) | grim + slurp (screenshots) |
+| | the quick settings panel: sliders, battery, power mode (about 45 MB, only while open) |
 
 Choices made to keep it small:
 
@@ -291,13 +291,15 @@ Delete `~/.config/{sway,waybar,fuzzel,mako,swaylock}` and rename the
 `.bak-<date>` folders back. GNOME is untouched, so you can pick it at the
 login screen any time.
 
-## Want a GNOME-style panel with sliders?
+## Why not SwayNotificationCenter?
 
-SwayNotificationCenter (swaync) adds a pull-out panel with volume and
-brightness sliders, toggle buttons, media controls and notification history.
-It replaces mako, but uses noticeably more memory, and on Fedora it comes
-from a COPR repo (`erikreider/SwayNotificationCenter`). It's left out on
-purpose.
+SwayNotificationCenter (swaync) is the usual way to get a GNOME-style panel
+on sway: sliders, toggle buttons, media controls and notification history in
+one pull-out panel. It replaces mako, but it's built on GTK4 and libadwaita
+and runs the whole time, so it uses noticeably more memory, and on Fedora it
+comes from a COPR repo (`erikreider/SwayNotificationCenter`). The quick
+settings panel here covers the sliders, battery and power mode and only uses
+memory while it's open, and clicking the clock lists recent notifications.
 
 ## Credits
 
