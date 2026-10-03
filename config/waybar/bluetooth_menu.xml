@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Drop-down for the Bluetooth icon in the bar. Each item id is linked to a
+     command in "menu-actions" in config.jsonc. -->
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="bt-pick">
+        <property name="label">Connect a device…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="bt-toggle">
+        <property name="label">Turn Bluetooth on/off</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep1"/>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="bt-pair">
+        <property name="label">Pair a new device…</property>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -41,6 +41,8 @@ packages=(
     grim slurp wl-clipboard libnotify xdg-user-dirs
     # password prompts for GUI apps, screen sharing
     lxpolkit xdg-desktop-portal-wlr
+    # quick settings panel (sliders, battery, power mode)
+    python3-gobject gtk3 upower
 )
 if (( setup_greetd )); then
     packages+=(greetd tuigreet)
@@ -69,7 +71,7 @@ for d in "${dirs[@]}"; do
     mkdir -p "$cfg/$d"
     cp -r "$here/config/$d/." "$cfg/$d/"
 done
-chmod +x "$cfg/sway/scripts/"*.sh "$cfg/waybar/scripts/"*.sh
+chmod +x "$cfg/sway/scripts/"*.sh "$cfg/sway/scripts/"*.py "$cfg/waybar/scripts/"*.sh
 
 # Refresh the font cache so the bar icons show up right away
 fc-cache -f >/dev/null 2>&1 || true

@@ -52,6 +52,11 @@
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="power-settings">
+        <property name="label">Power &amp; sleep settings…</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkSeparatorMenuItem" id="sep2"/>
     </child>
     <child>

@@ -40,6 +40,11 @@ Ctrl + Cmd + Shift + S       Screenshot the whole screen
 Ctrl + Shift + W             Change wallpaper
 Ctrl + N                     Do Not Disturb on/off
 -- MOUSE AND MAC KEYS ---------------------------------------------------
-Bar icons                    Click: settings, right-click: quick action
-Sliders icon (top right)     Quick settings menu
+Volume / brightness icons    Click: quick settings. Scroll: change level
+Battery icon                 Click: time left, power mode, sliders
+Wi-Fi / Bluetooth icons      Click: drop-down menu
+Clock                        Click: recent notifications. Scroll: calendar
+Sliders icon (top right)     Quick settings, incl. Power & sleep settings
 Top row (F1, F2, F7 - F12)   Brightness, media and volume, as on macOS
+Power button                 Lock and sleep (hold to force the Mac off)
+Closing the lid              Lock and sleep

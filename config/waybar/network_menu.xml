@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Drop-down for the Wi-Fi icon in the bar. Each item id is linked to a
+     command in "menu-actions" in config.jsonc. -->
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="wifi-pick">
+        <property name="label">Choose a Wi-Fi network…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="wifi-toggle">
+        <property name="label">Turn Wi-Fi on/off</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep1"/>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="net-settings">
+        <property name="label">Network settings…</property>
+      </object>
+    </child>
+  </object>
+</interface>

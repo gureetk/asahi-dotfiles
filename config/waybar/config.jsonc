@@ -38,6 +38,12 @@
     "clock": {
         "format": "{:%a %b %d   %H:%M}",
         "tooltip-format": "<tt>{calendar}</tt>",
+        "on-click": "~/.config/sway/scripts/notifications.sh",
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_down",
+            "on-scroll-down": "shift_up"
+        },
         "calendar": {
             "mode": "month",
             "format": {
@@ -70,12 +76,17 @@
         "format-ethernet": "",
         "format-disconnected": "",
         "format-disabled": "",
-        "tooltip-format-wifi": "{essid}  ({signalStrength}%)\n{ipaddr}\n\nClick: pick a network\nRight-click: connection settings",
+        "tooltip-format-wifi": "{essid}  ({signalStrength}%)\n{ipaddr}",
         "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
-        "tooltip-format-disconnected": "Not connected\n\nClick: pick a network",
+        "tooltip-format-disconnected": "Not connected",
         "tooltip-format-disabled": "Wi-Fi is off",
-        "on-click": "foot --app-id=float-term -e nmtui connect",
-        "on-click-right": "nm-connection-editor"
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/network_menu.xml",
+        "menu-actions": {
+            "wifi-pick": "~/.config/sway/scripts/wifi.sh",
+            "wifi-toggle": "~/.config/sway/scripts/toggle.sh wifi",
+            "net-settings": "nm-connection-editor"
+        }
     },
 
     "bluetooth": {
@@ -84,10 +95,16 @@
         "format-disabled": "",
         "format-connected": "",
         "format-no-controller": "",
-        "tooltip-format": "Bluetooth: {status}\n\nClick: devices\nRight-click: turn on/off",
-        "tooltip-format-connected": "Connected:\n{device_enumerate}\n\nClick: devices\nRight-click: turn on/off",
+        "tooltip-format": "Bluetooth: {status}",
+        "tooltip-format-connected": "Connected:\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
-        "on-click": "blueman-manager",
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/bluetooth_menu.xml",
+        "menu-actions": {
+            "bt-pick": "~/.config/sway/scripts/bluetooth.sh",
+            "bt-toggle": "~/.config/sway/scripts/toggle.sh bluetooth",
+            "bt-pair": "blueman-manager"
+        },
         "on-click-right": "~/.config/sway/scripts/toggle.sh bluetooth"
     },
 
@@ -97,17 +114,19 @@
         "format-icons": {
             "default": ["", "", ""]
         },
-        "scroll-step": 5,
-        "tooltip-format": "{desc}: {volume}%\n\nScroll: volume\nClick: sound settings\nRight-click: mute",
-        "on-click": "pavucontrol",
-        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        "tooltip-format": "{desc}: {volume}%\n\nClick for sliders, scroll to change, right-click to mute",
+        "on-scroll-up": "~/.config/sway/scripts/osd.sh volume up",
+        "on-scroll-down": "~/.config/sway/scripts/osd.sh volume down",
+        "on-click": "~/.config/sway/scripts/quick-panel.py",
+        "on-click-right": "~/.config/sway/scripts/osd.sh volume mute"
     },
 
     "backlight": {
         "format": "",
-        "tooltip-format": "Brightness {percent}%\n\nScroll: adjust",
-        "on-scroll-up": "brightnessctl -q set 5%+",
-        "on-scroll-down": "brightnessctl -q set 5%-"
+        "tooltip-format": "Brightness {percent}%\n\nClick for sliders, scroll to change",
+        "on-scroll-up": "~/.config/sway/scripts/osd.sh brightness up",
+        "on-scroll-down": "~/.config/sway/scripts/osd.sh brightness down",
+        "on-click": "~/.config/sway/scripts/quick-panel.py"
     },
 
     "battery": {
@@ -120,7 +139,8 @@
         "format-charging": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {capacity}%",
         "format-plugged": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {capacity}%",
         "format-icons": ["", "", "", "", ""],
-        "tooltip-format": "{timeTo}"
+        "tooltip-format": "{timeTo}\n\nClick for details and power mode",
+        "on-click": "~/.config/sway/scripts/quick-panel.py"
     },
 
     "custom/control": {
@@ -129,8 +149,8 @@
         "menu": "on-click",
         "menu-file": "~/.config/waybar/control_menu.xml",
         "menu-actions": {
-            "wifi": "foot --app-id=float-term -e nmtui connect",
-            "bluetooth": "blueman-manager",
+            "wifi": "~/.config/sway/scripts/wifi.sh",
+            "bluetooth": "~/.config/sway/scripts/bluetooth.sh",
             "sound": "pavucontrol",
             "wifi-toggle": "~/.config/sway/scripts/toggle.sh wifi",
             "bluetooth-toggle": "~/.config/sway/scripts/toggle.sh bluetooth",
@@ -138,7 +158,8 @@
             "screenshot": "~/.config/sway/scripts/screenshot.sh area",
             "wallpaper": "~/.config/sway/scripts/wallpaper.sh",
             "keybinds": "~/.config/sway/scripts/keybinds.sh",
-            "lock": "swaylock -f",
+            "power-settings": "~/.config/sway/scripts/power-settings.sh",
+            "lock": "~/.config/sway/scripts/lock.sh",
             "suspend": "systemctl suspend",
             "logout": "swaymsg exit",
             "reboot": "systemctl reboot",
