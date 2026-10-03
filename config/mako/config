@@ -1,5 +1,11 @@
-# ~/.config/mako/config  -  notifications (top right)
-# Every option: man 5 mako
+# ~/.config/mako/config  -  notifications (top right) and the volume /
+# brightness pop-up (bottom middle). Every option: man 5 mako
+
+max-history=20
+
+# Lifts the volume / brightness pop-up off the bottom edge (only affects
+# pop-ups anchored at the bottom)
+outer-margin=0,0,90,0
 
 font=sans-serif 11
 background-color=#16161ef2
@@ -24,3 +30,24 @@ default-timeout=0
 # Do Not Disturb (toggled with Ctrl+N or the quick-settings menu)
 [mode=do-not-disturb]
 invisible=1
+
+# Volume / brightness pop-up from osd.sh. It replaces itself instead of
+# stacking, stays out of the notification history, and still shows during
+# Do Not Disturb.
+[app-name=osd]
+anchor=bottom-center
+width=260
+padding=14,18
+border-size=0
+border-radius=14
+background-color=#16161ee6
+progress-color=over #7aa2f7
+font=sans-serif 12
+text-alignment=center
+format=%b   <b>%s</b>
+icons=0
+default-timeout=1500
+history=0
+
+[mode=do-not-disturb app-name=osd]
+invisible=0
