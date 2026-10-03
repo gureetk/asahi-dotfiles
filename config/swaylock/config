@@ -4,11 +4,11 @@ inside-color=1f2029
 inside-clear-color=1f2029
 inside-ver-color=1f2029
 inside-wrong-color=1f2029
-ring-color=2a2c3a
+ring-color=7aa2f7
 ring-clear-color=e0af68
-ring-ver-color=7aa2f7
+ring-ver-color=9ece6a
 ring-wrong-color=f7768e
-key-hl-color=7aa2f7
+key-hl-color=e6e6ef
 bs-hl-color=f7768e
 line-color=00000000
 line-clear-color=00000000
@@ -19,7 +19,10 @@ text-color=e6e6ef
 text-clear-color=e6e6ef
 text-ver-color=e6e6ef
 text-wrong-color=f7768e
-indicator-radius=90
-indicator-thickness=8
+indicator-radius=100
+indicator-thickness=10
+# Keep the ring on screen even before you start typing, so the lock screen
+# never looks like a blank, frozen display
+indicator-idle-visible
 show-failed-attempts
 ignore-empty-password
