@@ -1,0 +1,45 @@
+Ctrl = Control key (sway's Mod)    Cmd = Command (works as Ctrl in apps)
+-- ESSENTIALS -----------------------------------------------------------
+Ctrl + ?                     This list (Ctrl + Shift + /). Type to search
+Ctrl + D  or  Ctrl + Space   App launcher
+Ctrl + Enter                 Terminal
+Ctrl + Shift + Q             Close window
+Ctrl + Shift + E             Power menu: lock, suspend, log out, reboot, off
+Ctrl + Cmd + Q               Lock screen (same as macOS)
+Ctrl + Shift + C             Reload sway and the bar after editing configs
+-- IN APPS (COMMAND KEY) ------------------------------------------------
+Cmd + C / X / V / Z          Copy / cut / paste / undo
+Cmd + A / F / S              Select all / find / save
+Cmd + T / W / Q              New tab / close tab / quit app
+Cmd + Tab                    Next browser tab (Cmd + Shift + Tab: previous)
+Cmd + Shift + C / V          Copy / paste in the terminal
+Cmd + C                      Stop the running command in the terminal
+-- WINDOWS --------------------------------------------------------------
+Ctrl + arrows  (or H J K L)  Focus the window left / down / up / right
+Ctrl + Shift + arrows        Move the window left / down / up / right
+Ctrl + F                     Fullscreen on/off
+Ctrl + Shift + Space         Float / tile the window
+Ctrl + drag                  Move a floating window (right-drag: resize)
+Ctrl + R                     Resize mode: arrows to resize, Esc to finish
+Ctrl + A                     Focus the parent container
+-- WORKSPACES -----------------------------------------------------------
+Ctrl + 1 ... 0               Go to workspace 1 ... 10
+Ctrl + Shift + 1 ... 0       Send the window to workspace 1 ... 10
+Ctrl + Tab                   Jump back to the previous workspace
+Ctrl + Shift + -             Hide the window in the scratchpad
+Ctrl + -                     Show / cycle scratchpad windows
+-- LAYOUT ---------------------------------------------------------------
+Ctrl + B                     Next window opens beside this one
+Ctrl + V                     Next window opens below this one
+Ctrl + W                     Tabbed layout
+Ctrl + S                     Stacked layout
+Ctrl + E                     Back to side-by-side split / flip direction
+-- TOOLS ----------------------------------------------------------------
+Ctrl + Shift + S             Screenshot an area (saved + copied)
+Ctrl + Cmd + Shift + S       Screenshot the whole screen
+Ctrl + Shift + W             Change wallpaper
+Ctrl + N                     Do Not Disturb on/off
+-- MOUSE AND MAC KEYS ---------------------------------------------------
+Bar icons                    Click: settings, right-click: quick action
+Sliders icon (top right)     Quick settings menu
+Top row (F1, F2, F7 - F12)   Brightness, media and volume, as on macOS

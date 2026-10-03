@@ -1,0 +1,212 @@
+# ~/.config/sway/config  -  sway setup for Fedora Asahi Remix (Apple M1)
+#
+# Reload after editing: Ctrl+Shift+C      Every option: man 5 sway
+# Key names below are the printed keys on the Mac keyboard. Command and
+# Control are swapped (see "Input"), so the Mod key is the Control key and
+# Command works like Ctrl does on other computers (Cmd+C, Cmd+V, Cmd+T...).
+# Press Ctrl+? (Ctrl+Shift+/) for a searchable list of every shortcut.
+
+### Variables ################################################################
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term foot
+set $menu fuzzel
+set $scripts ~/.config/sway/scripts
+
+# Display scale: 2 = big and sharpest, 1.5 = more room, 1.25 = even more room.
+set $scale 1.5
+
+### Look #####################################################################
+
+font pango:sans-serif 10
+
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+gaps inner 6
+gaps outer 2
+
+# class                 border  bg      text    indicator child_border
+client.focused          #7aa2f7 #7aa2f7 #16161e #9ece6a   #7aa2f7
+client.focused_inactive #2a2c3a #2a2c3a #e6e6ef #2a2c3a   #2a2c3a
+client.unfocused        #1f2029 #1f2029 #8a8ca0 #1f2029   #1f2029
+client.urgent           #f7768e #f7768e #16161e #f7768e   #f7768e
+
+### Displays #################################################################
+
+output * scale $scale
+# Wallpaper: press Ctrl+Shift+W to pick one, or run
+#   ~/.config/sway/scripts/wallpaper.sh /path/to/image.jpg
+# Your choice is saved in wallpaper.conf, which overrides this plain color.
+output * bg #16161e solid_color
+include ~/.config/sway/wallpaper.conf
+
+seat seat0 xcursor_theme Adwaita 24
+
+### Input ####################################################################
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+    # Turn the touchpad off while typing
+    dwt enabled
+    # Two-finger click = right click, like macOS
+    click_method clickfinger
+}
+
+input type:keyboard {
+    repeat_delay 300
+    repeat_rate 40
+    # Swap Command and Control: Command now acts as Ctrl in apps (Cmd+C copies,
+    # Cmd+V pastes), and the Control key becomes the sway Mod key.
+    # Delete this line to go back to the normal layout.
+    xkb_options ctrl:swap_lwin_lctl,ctrl:swap_rwin_rctl
+}
+
+### Idle and lock ############################################################
+
+# Lock after 5 min, screen off 30 s later, always lock before sleep.
+exec swayidle -w \
+    timeout 300 'swaylock -f' \
+    timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    before-sleep 'swaylock -f'
+
+# Don't lock while something is fullscreen (videos, presentations)
+for_window [app_id=".*"] inhibit_idle fullscreen
+for_window [class=".*"] inhibit_idle fullscreen
+
+### Autostart ################################################################
+
+# Share the session environment with systemd and D-Bus
+# (needed for screen sharing, file pickers and notifications).
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+exec waybar
+exec mako
+# Password prompts for GUI apps that need admin rights
+exec lxpolkit
+
+### Window rules #############################################################
+
+# Settings-style apps open as centered floating windows
+for_window [app_id="pavucontrol|blueman-manager|nm-connection-editor|float-term"] floating enable, resize set width 760 px height 540 px, move position center
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable
+
+### Key bindings #############################################################
+
+# Basics
+# Shortcut list: Ctrl+? (Ctrl+Shift+/) or Ctrl+/
+bindsym $mod+slash exec $scripts/keybinds.sh
+bindsym $mod+Shift+slash exec $scripts/keybinds.sh
+bindsym $mod+question exec $scripts/keybinds.sh
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+space exec $menu
+bindsym $mod+Shift+q kill
+floating_modifier $mod normal
+bindsym $mod+Shift+c exec pkill -SIGUSR2 waybar; reload
+
+# Power menu (lock, suspend, log out, reboot, shut down)
+bindsym $mod+Shift+e exec $scripts/powermenu.sh
+# Lock the screen: Ctrl+Cmd+Q, same as macOS
+bindsym $mod+Ctrl+q exec swaylock -f
+
+# Screenshots: saved to ~/Pictures/Screenshots and copied to the clipboard
+bindsym $mod+Shift+s exec $scripts/screenshot.sh area
+bindsym $mod+Ctrl+Shift+s exec $scripts/screenshot.sh full
+
+# Do Not Disturb on/off
+bindsym $mod+n exec $scripts/toggle.sh dnd
+
+# Pick a wallpaper
+bindsym $mod+Shift+w exec $scripts/wallpaper.sh
+
+# Move focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+# Ctrl+Tab flips back to the previous workspace
+bindsym $mod+Tab workspace back_and_forth
+
+# Layout
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+a focus parent
+
+# Scratchpad (a hidden drawer for windows)
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Resize mode: Ctrl+R, then arrows or hjkl, Esc to leave
+mode "resize" {
+    bindsym $left resize shrink width 20px
+    bindsym $down resize grow height 20px
+    bindsym $up resize shrink height 20px
+    bindsym $right resize grow width 20px
+    bindsym Left resize shrink width 20px
+    bindsym Down resize grow height 20px
+    bindsym Up resize shrink height 20px
+    bindsym Right resize grow width 20px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Mac function keys (work on the lock screen too)
+bindsym --locked XF86MonBrightnessUp exec brightnessctl -q set 5%+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl -q set 5%-
+bindsym --locked XF86KbdBrightnessUp exec brightnessctl -q -d '*kbd_backlight*' set 10%+
+bindsym --locked XF86KbdBrightnessDown exec brightnessctl -q -d '*kbd_backlight*' set 10%-
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous

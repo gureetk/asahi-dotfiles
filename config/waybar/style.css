@@ -1,0 +1,175 @@
+/* ~/.config/waybar/style.css
+   Change the palette here; everything below uses these names. */
+
+@define-color bg      #16161e;
+@define-color hover   #2a2c3a;
+@define-color text    #e6e6ef;
+@define-color muted   #8a8ca0;
+@define-color accent  #7aa2f7;
+@define-color good    #9ece6a;
+@define-color warn    #e0af68;
+@define-color crit    #f7768e;
+
+* {
+    font-family: sans-serif;
+    font-size: 13px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+/* Every block on the bar is a rounded pill */
+#custom-launcher,
+#workspaces,
+#mode,
+#scratchpad,
+#clock,
+#custom-dnd,
+#tray,
+#status,
+#custom-control {
+    background: alpha(@bg, 0.92);
+    border-radius: 10px;
+    padding: 0 11px;
+}
+
+/* Icon-only blocks use Font Awesome */
+#custom-launcher,
+#custom-dnd,
+#custom-control,
+#network,
+#bluetooth,
+#pulseaudio,
+#backlight {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", sans-serif;
+    font-weight: 900;
+}
+
+#custom-launcher:hover,
+#custom-control:hover,
+#clock:hover {
+    background: @hover;
+}
+
+/* Workspaces */
+#workspaces {
+    padding: 0 3px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 4px 1px;
+    border-radius: 7px;
+    color: @muted;
+    background: transparent;
+    background-image: none;
+}
+
+#workspaces button:hover {
+    background: @hover;
+    color: @text;
+}
+
+#workspaces button.focused {
+    background: @accent;
+    color: @bg;
+}
+
+#workspaces button.urgent {
+    background: @crit;
+    color: @bg;
+}
+
+#mode {
+    background: @warn;
+    color: @bg;
+}
+
+/* Status cluster: network, bluetooth, volume, brightness, battery */
+#status {
+    padding: 0 4px;
+}
+
+#network,
+#bluetooth,
+#pulseaudio,
+#backlight,
+#battery {
+    padding: 0 7px;
+}
+
+#network.disconnected,
+#network.disabled,
+#bluetooth.off,
+#bluetooth.disabled,
+#pulseaudio.muted {
+    color: @muted;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @good;
+}
+
+#battery.warning:not(.charging) {
+    color: @warn;
+}
+
+#battery.critical:not(.charging) {
+    color: @crit;
+}
+
+#custom-dnd {
+    color: @warn;
+}
+
+/* Hide the tray pill when no app has a tray icon */
+#tray.empty {
+    background: transparent;
+    padding: 0;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* Tooltips and the quick-settings menu */
+tooltip {
+    background: @bg;
+    border: 1px solid @hover;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: @text;
+}
+
+menu {
+    background: @bg;
+    border: 1px solid @hover;
+    border-radius: 10px;
+    padding: 6px;
+}
+
+menuitem {
+    color: @text;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+menuitem:hover {
+    background: @hover;
+}
+
+menu separator {
+    background: @hover;
+    min-height: 1px;
+    margin: 4px 6px;
+}

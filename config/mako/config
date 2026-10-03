@@ -1,0 +1,26 @@
+# ~/.config/mako/config  -  notifications (top right)
+# Every option: man 5 mako
+
+font=sans-serif 11
+background-color=#16161ef2
+text-color=#e6e6ef
+border-color=#7aa2f7
+border-size=2
+border-radius=12
+padding=12
+margin=10
+width=360
+icon-path=/usr/share/icons/Adwaita
+max-icon-size=48
+max-visible=4
+default-timeout=6000
+layer=overlay
+anchor=top-right
+
+[urgency=critical]
+border-color=#f7768e
+default-timeout=0
+
+# Do Not Disturb (toggled with Ctrl+N or the quick-settings menu)
+[mode=do-not-disturb]
+invisible=1

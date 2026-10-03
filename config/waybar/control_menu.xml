@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Quick-settings menu for the sliders button in the top right of the bar.
+     Each item id is linked to a command in "menu-actions" in config.jsonc. -->
+<interface>
+  <object class="GtkMenu" id="menu">
+    <child>
+      <object class="GtkMenuItem" id="wifi">
+        <property name="label">Wi-Fi networks…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="bluetooth">
+        <property name="label">Bluetooth devices…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="sound">
+        <property name="label">Sound settings…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep1"/>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="wifi-toggle">
+        <property name="label">Turn Wi-Fi on/off</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="bluetooth-toggle">
+        <property name="label">Turn Bluetooth on/off</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="dnd">
+        <property name="label">Do Not Disturb on/off</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="screenshot">
+        <property name="label">Screenshot area</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="wallpaper">
+        <property name="label">Change wallpaper…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="keybinds">
+        <property name="label">Keyboard shortcuts…</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep2"/>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="lock">
+        <property name="label">Lock</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="suspend">
+        <property name="label">Suspend</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="logout">
+        <property name="label">Log out</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="reboot">
+        <property name="label">Reboot</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="poweroff">
+        <property name="label">Shut down</property>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -1,0 +1,25 @@
+# ~/.config/swaylock/config  -  lock screen colors
+color=16161e
+inside-color=1f2029
+inside-clear-color=1f2029
+inside-ver-color=1f2029
+inside-wrong-color=1f2029
+ring-color=2a2c3a
+ring-clear-color=e0af68
+ring-ver-color=7aa2f7
+ring-wrong-color=f7768e
+key-hl-color=7aa2f7
+bs-hl-color=f7768e
+line-color=00000000
+line-clear-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+separator-color=00000000
+text-color=e6e6ef
+text-clear-color=e6e6ef
+text-ver-color=e6e6ef
+text-wrong-color=f7768e
+indicator-radius=90
+indicator-thickness=8
+show-failed-attempts
+ignore-empty-password

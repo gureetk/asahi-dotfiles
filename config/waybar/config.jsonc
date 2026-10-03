@@ -1,0 +1,148 @@
+// ~/.config/waybar/config.jsonc
+// Reload the bar after editing: Ctrl+Shift+C (reloads sway and waybar)
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "margin-top": 6,
+    "margin-left": 8,
+    "margin-right": 8,
+    "spacing": 6,
+
+    "modules-left": ["custom/launcher", "sway/workspaces", "sway/mode", "sway/scratchpad"],
+    "modules-center": ["clock", "custom/dnd"],
+    "modules-right": ["tray", "group/status", "custom/control"],
+
+    "custom/launcher": {
+        "format": "",
+        "tooltip-format": "Apps (Ctrl+D)",
+        "on-click": "fuzzel"
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "format": "{name}"
+    },
+
+    "sway/mode": {
+        "format": "{}"
+    },
+
+    "sway/scratchpad": {
+        "format": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {count}",
+        "show-empty": false,
+        "tooltip-format": "{app}: {title}",
+        "on-click": "swaymsg 'scratchpad show'"
+    },
+
+    "clock": {
+        "format": "{:%a %b %d   %H:%M}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "today": "<span color='#7aa2f7'><b>{}</b></span>"
+            }
+        }
+    },
+
+    "custom/dnd": {
+        "exec": "~/.config/waybar/scripts/dnd-status.sh",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8,
+        "on-click": "~/.config/sway/scripts/toggle.sh dnd"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "group/status": {
+        "orientation": "horizontal",
+        "modules": ["network", "bluetooth", "pulseaudio", "backlight", "battery"]
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "format-disabled": "",
+        "tooltip-format-wifi": "{essid}  ({signalStrength}%)\n{ipaddr}\n\nClick: pick a network\nRight-click: connection settings",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+        "tooltip-format-disconnected": "Not connected\n\nClick: pick a network",
+        "tooltip-format-disabled": "Wi-Fi is off",
+        "on-click": "foot --app-id=float-term -e nmtui connect",
+        "on-click-right": "nm-connection-editor"
+    },
+
+    "bluetooth": {
+        "format": "",
+        "format-off": "",
+        "format-disabled": "",
+        "format-connected": "",
+        "format-no-controller": "",
+        "tooltip-format": "Bluetooth: {status}\n\nClick: devices\nRight-click: turn on/off",
+        "tooltip-format-connected": "Connected:\n{device_enumerate}\n\nClick: devices\nRight-click: turn on/off",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click": "blueman-manager",
+        "on-click-right": "~/.config/sway/scripts/toggle.sh bluetooth"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "scroll-step": 5,
+        "tooltip-format": "{desc}: {volume}%\n\nScroll: volume\nClick: sound settings\nRight-click: mute",
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+
+    "backlight": {
+        "format": "",
+        "tooltip-format": "Brightness {percent}%\n\nScroll: adjust",
+        "on-scroll-up": "brightnessctl -q set 5%+",
+        "on-scroll-down": "brightnessctl -q set 5%-"
+    },
+
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 12
+        },
+        "format": "<span font_family='Font Awesome 6 Free' font_weight='900'>{icon}</span>  {capacity}%",
+        "format-charging": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {capacity}%",
+        "format-plugged": "<span font_family='Font Awesome 6 Free' font_weight='900'></span>  {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "{timeTo}"
+    },
+
+    "custom/control": {
+        "format": "",
+        "tooltip-format": "Quick settings",
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/control_menu.xml",
+        "menu-actions": {
+            "wifi": "foot --app-id=float-term -e nmtui connect",
+            "bluetooth": "blueman-manager",
+            "sound": "pavucontrol",
+            "wifi-toggle": "~/.config/sway/scripts/toggle.sh wifi",
+            "bluetooth-toggle": "~/.config/sway/scripts/toggle.sh bluetooth",
+            "dnd": "~/.config/sway/scripts/toggle.sh dnd",
+            "screenshot": "~/.config/sway/scripts/screenshot.sh area",
+            "wallpaper": "~/.config/sway/scripts/wallpaper.sh",
+            "keybinds": "~/.config/sway/scripts/keybinds.sh",
+            "lock": "swaylock -f",
+            "suspend": "systemctl suspend",
+            "logout": "swaymsg exit",
+            "reboot": "systemctl reboot",
+            "poweroff": "systemctl poweroff"
+        }
+    }
+}
