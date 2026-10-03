@@ -8,23 +8,18 @@ GNOME-style volume and brightness pop-ups, an app launcher, notifications, a
 lock screen, screenshots and a wallpaper picker.
 Command and Control are swapped, so Cmd+C and Cmd+V work like on macOS.
 
-<!-- Add a screenshot: press Ctrl+Cmd+Shift+S, copy the file from
-     ~/Pictures/Screenshots into this repo as screenshot.png, and
-     uncomment the line below. -->
-<!-- ![Desktop](screenshot.png) -->
+![Desktop](screenshot.png)
 
 ## Why
 
 On an 8 GB Mac every gigabyte matters. Measured on an M1 with 8 GB, idle
 right after logging in:
 
-<!-- TODO: fresh boot, log in, wait a minute, run `free -h`, and put the
-     "used" number in the "This setup" row -->
 | Desktop | RAM used at idle |
 |---|---|
 | GNOME (Fedora Asahi Remix default) | 2.73 GB |
 | Stock sway | 1.07 GB |
-| This setup | — |
+| This setup | 1.1 GB |
 
 Most of the savings come from not running things until you need them:
 
@@ -71,8 +66,8 @@ the top of `install.sh` yourself and copy the `config/` folders into
 ## Install
 
 ```
-git clone https://github.com/YOUR-NAME/YOUR-REPO.git
-cd YOUR-REPO
+git clone https://codeberg.org/gureetk/asahi-dotfiles.git
+cd asahi-dotfiles
 ./install.sh
 ```
 
