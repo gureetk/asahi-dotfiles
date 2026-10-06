@@ -77,7 +77,7 @@ Then log out, pick **Sway** at the login screen, and log in.
 |---|---|
 | `./install.sh` | Installs the packages, then copies the configs |
 | `./install.sh --no-packages` | Copies the configs only. Use this to update after the packages are already installed |
-| `./install.sh --greetd` | Also replaces GDM with the greetd + tuigreet login screen (takes effect after a reboot) |
+| `./install.sh --greetd` | Also replaces GDM with the greetd + tuigreet login screen, with text sized for the Retina screen (takes effect after a reboot) |
 
 Flags can be combined, e.g. `./install.sh --no-packages --greetd`.
 
@@ -140,7 +140,7 @@ Prefer the normal layout? Delete the `xkb_options` line in
 | Right | Volume | Quick settings panel (see below) | Scroll: volume. Right-click: mute |
 | Right | Sun | The same panel | Scroll: brightness |
 | Right | Battery | The same panel | Hover: time left |
-| Far right | Sliders | Quick settings: Wi-Fi, Bluetooth, sound, on/off toggles, Do Not Disturb, screenshot, wallpaper, shortcuts, lock, suspend, log out, reboot, shut down | |
+| Far right | Sliders | Quick settings: Wi-Fi, Bluetooth, sound, on/off toggles, Do Not Disturb, screenshot, wallpaper, display scale, shortcuts, power & sleep, lock, suspend, log out, reboot, shut down | |
 
 The **quick settings panel** drops down under the icons, like GNOME's:
 
@@ -213,11 +213,27 @@ Press **Ctrl+Shift+W** (or use the sliders menu) to pick an image from
 The image is copied into `~/.config/sway/`, so it stays after reboots even if
 the original is moved or deleted. JPG and PNG work.
 
+## Display scale
+
+Open the sliders icon menu → **Display scale…** to make everything bigger or
+smaller: 100%, 125%, 150% (the default), 175% or 200%. It changes right away
+and is saved in `~/.config/sway/scale.conf`. From a terminal:
+`~/.config/sway/scripts/scale.sh 175%`.
+
+**Login screen text.** The greetd login screen runs on the text console, so
+it doesn't follow the display scale; its size comes from the console font.
+`./install.sh --greetd` sets it to 150%. To change it, pick **Login screen
+text size…** at the bottom of the Display scale menu. It asks for your
+password and shows from the next restart. If you've encrypted the disk, also
+run `sudo dracut -f --regenerate-all` once so the passphrase prompt at startup
+uses the new size too.
+
 ## Customizing
 
 | To change | Edit |
 |---|---|
-| Display scale (default 1.5) | `set $scale` near the top of `~/.config/sway/config` |
+| Display scale | Sliders menu → Display scale (saved in `~/.config/sway/scale.conf`; the default is `set $scale` in `~/.config/sway/config`) |
+| Login screen text size | Sliders menu → Display scale → Login screen text size (or the `FONT=` line in `/etc/vconsole.conf`) |
 | Bar colors | The `@define-color` lines at the top of `~/.config/waybar/style.css` |
 | Bar contents | `~/.config/waybar/config.jsonc` |
 | Quick-settings menu items | `~/.config/waybar/control_menu.xml` plus `menu-actions` in `config.jsonc` |
@@ -244,7 +260,8 @@ config/
   sway/keybinds.txt        the Ctrl+? shortcut list
   sway/scripts/            quick settings panel (quick-panel.py), idle / power settings,
                            pop-up (osd.sh), Wi-Fi / Bluetooth / sound pickers,
-                           power menu, screenshots, toggles, wallpaper, shortcut list
+                           power menu, screenshots, toggles, wallpaper, display scale,
+                           shortcut list
   waybar/                  bar layout, style, and the drop-down menus (*_menu.xml)
   fuzzel/fuzzel.ini        launcher
   mako/config              notifications

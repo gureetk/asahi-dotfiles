@@ -157,6 +157,7 @@
             "dnd": "~/.config/sway/scripts/toggle.sh dnd",
             "screenshot": "~/.config/sway/scripts/screenshot.sh area",
             "wallpaper": "~/.config/sway/scripts/wallpaper.sh",
+            "scale": "~/.config/sway/scripts/scale.sh",
             "keybinds": "~/.config/sway/scripts/keybinds.sh",
             "power-settings": "~/.config/sway/scripts/power-settings.sh",
             "lock": "~/.config/sway/scripts/lock.sh",

@@ -18,6 +18,8 @@ set $menu fuzzel
 set $scripts ~/.config/sway/scripts
 
 # Display scale: 2 = big and sharpest, 1.5 = more room, 1.25 = even more room.
+# Change it from the quick-settings menu (Display scale), which saves your
+# choice in scale.conf (included below) and overrides this default.
 set $scale 1.5
 
 ### Look #####################################################################
@@ -39,6 +41,7 @@ client.urgent           #f7768e #f7768e #16161e #f7768e   #f7768e
 ### Displays #################################################################
 
 output * scale $scale
+include ~/.config/sway/scale.conf
 # Wallpaper: press Ctrl+Shift+W to pick one, or run
 #   ~/.config/sway/scripts/wallpaper.sh /path/to/image.jpg
 # Your choice is saved in wallpaper.conf, which overrides this plain color.

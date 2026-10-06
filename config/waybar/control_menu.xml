@@ -47,6 +47,11 @@
       </object>
     </child>
     <child>
+      <object class="GtkMenuItem" id="scale">
+        <property name="label">Display scale…</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkMenuItem" id="keybinds">
         <property name="label">Keyboard shortcuts…</property>
       </object>

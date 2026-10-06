@@ -43,6 +43,8 @@ packages=(
     lxpolkit xdg-desktop-portal-wlr
     # quick settings panel (sliders, battery, power mode)
     python3-gobject gtk3 upower
+    # bigger text on the login screen and text consoles
+    terminus-fonts-console
 )
 if (( setup_greetd )); then
     packages+=(greetd tuigreet)
@@ -58,7 +60,7 @@ if (( install_packages || setup_greetd )); then
     if (( install_packages )); then
         sudo dnf install -y "${skip[@]}" "${packages[@]}"
     else
-        sudo dnf install -y greetd tuigreet
+        sudo dnf install -y "${skip[@]}" greetd tuigreet terminus-fonts-console
     fi
 fi
 
@@ -115,6 +117,32 @@ user = "$greeter"
 EOF
     # tuigreet keeps the last user and session here (for --remember)
     sudo install -d -o "$greeter" -g "$greeter" -m 755 /var/cache/tuigreet
+
+    # Bigger login screen text. tuigreet runs on the text console, whose
+    # default font is tiny on a Retina screen, so use a Terminus console font
+    # the same size as the 150% display scale. Change it later from the
+    # quick-settings menu: Display scale -> Login screen text size.
+    vconsole=/etc/vconsole.conf
+    font=""
+    for f in /usr/lib/kbd/consolefonts/ter-{v,u,i,1}24n.psf*; do
+        if [[ -e "$f" ]]; then font=${f##*/}; font=${font%%.*}; break; fi
+    done
+    if grep -qs '^FONT="\{0,1\}ter-' "$vconsole"; then
+        echo "    login screen text size already set in $vconsole"
+    elif [[ -z "$font" ]]; then
+        echo "    Terminus console fonts not found, so the login screen text stays small"
+    else
+        if [[ -f "$vconsole" ]]; then
+            sudo cp -a "$vconsole" "$vconsole.bak-$stamp"
+            echo "    backed up $vconsole -> vconsole.conf.bak-$stamp"
+        fi
+        if grep -qs '^FONT=' "$vconsole"; then
+            sudo sed -i "s/^FONT=.*/FONT=\"$font\"/" "$vconsole"
+        else
+            echo "FONT=\"$font\"" | sudo tee -a "$vconsole" >/dev/null
+        fi
+        echo "    login screen text set to 150% ($font in $vconsole)"
+    fi
 
     # Switch the display manager: turn off the current one (usually gdm), turn on greetd
     current=$(systemctl show -p Id --value display-manager.service 2>/dev/null || true)
